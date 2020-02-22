@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.bestbiteapp;
 
 import org.junit.Test;
 
