@@ -1,6 +1,8 @@
 package com.example.bestbiteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView imageView;
+    private Button button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,17 +20,27 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         Button button = (Button) findViewById(R.id.button1);
-    // Example of a call to a native method
-//    imageView = (ImageView) findViewById(R.id.logo1);
 
-    button.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Button button2 = (Button) findViewById(R.id.button1);
-            button2.setText("Yuxuan is GAY!!");
-        }
-    });
+        button1 = (Button) findViewById(R.id.button1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPreference1();
+            }
+        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////            Button button2 = (Button) findViewById(R.id.button1);
+////            button2.setText("Yuxuan is GAY!!");
+//                openPreference1();
+//            }
+//        });
+    }
 
+    public void openPreference1() {
+        Intent intent = new Intent(this, Preference1.class);
+        startActivity(intent);
     }
 
     /**
