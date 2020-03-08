@@ -57,4 +57,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TBL_NAME);
         onCreate((db));
     }
+
+    public int checkRating(String DishName) {
+        SQLiteDatabase connection_r = this.getReadableDatabase();
+        Cursor cur = connection_r.rawQuery("SELECT rating FROM "+ TBL_NAME + " WHERE dish = " + DishName, null );
+        cur.moveToFirst();
+        return cur.getInt(cur.getPosition());
+    }
+
+    public void updateRating(String DishName, int newRating){
+        SQLiteDatabase connection_w = this.getWritableDatabase();
+        connection_w.execSQL("UPDATE TABLE " + TBL_NAME + " SET rating = " + newRating + " WHERE dish = " + DishName );
+    }
 }
