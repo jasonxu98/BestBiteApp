@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/amatic_sc</item>
+        <item>@font/audiowide</item>
+        <item>@font/bonbon</item>
+        <item>@font/felipa</item>
+        <item>@font/nosifer</item>
+        <item>@font/spicy_rice</item>
+    </array>
+</resources>
