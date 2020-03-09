@@ -90,6 +90,7 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
         String selected = options.get(position);
         Toast.makeText(this, " You select >> "+options.get(position), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), Popup.class);
+        i.putExtra("key", selected);
         startActivity(i);
     }
 

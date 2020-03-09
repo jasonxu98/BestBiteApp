@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void updateMenu(ArrayList TotalMenu){
+    public void updateMenu(ArrayList<String> TotalMenu){
         for (int i = 0; i < TotalMenu.size(); i++){
             Object DishName = TotalMenu.get(i);
             String DishStr = String.valueOf(DishName);
