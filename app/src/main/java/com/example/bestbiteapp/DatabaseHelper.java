@@ -45,35 +45,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void updateMenu(){
-        ArrayList<String> TotalMenu = new ArrayList<String>();
-        TotalMenu.add("chicken");
-        TotalMenu.add("steak");
-        TotalMenu.add("pork");
-        TotalMenu.add("curry");
-
+    public void updateMenu(ArrayList TotalMenu){
         for (int i = 0; i < TotalMenu.size(); i++){
-            String DishName = TotalMenu.get(i);
+            Object DishName = TotalMenu.get(i);
+            String DishStr = String.valueOf(DishName);
             SQLiteDatabase connection = this.getWritableDatabase();
-            Cursor cur = connection.rawQuery("SELECT * FROM "+ TBL_NAME + " WHERE dish = '" + DishName + "'", null );
+            Cursor cur = connection.rawQuery("SELECT * FROM "+ TBL_NAME + " WHERE dish = ? ", new String[] { DishStr } );
             if (cur.getCount() == 0){
                 ContentValues contentValues = new ContentValues();
-                contentValues.put("dish", DishName);
+                contentValues.put("dish", DishStr);
                 contentValues.put("rating", 0);
                 connection.insert(TBL_NAME, null, contentValues);
             }
+            cur.close();
         }
     }
 
-    public int checkRating(String DishName) {
-        SQLiteDatabase connection_r = this.getReadableDatabase();
-        Cursor cur = connection_r.rawQuery("SELECT rating FROM "+ TBL_NAME + " WHERE dish = '" + DishName + "'", null );
+    public int checkRating(String DishStr) {
+        SQLiteDatabase connection = this.getReadableDatabase();
+        Cursor cur = connection.rawQuery("SELECT rating FROM "+ TBL_NAME + " WHERE dish = ?", new String[] { DishStr } );
         cur.moveToFirst();
+//        int rating = cur.getInt(1);
+//        cur.close();
         return cur.getInt(1);
     }
 
-    public void updateRating(String DishName, int newRating){
-        SQLiteDatabase connection_w = this.getWritableDatabase();
-        connection_w.execSQL("UPDATE " + TBL_NAME + " SET rating = " + newRating + " WHERE dish = '" + DishName + "'");
+    public void updateRating(String DishStr, int newRating){
+        SQLiteDatabase connection = this.getWritableDatabase();
+        connection.rawQuery("UPDATE " + TBL_NAME + " SET rating = " + newRating + " WHERE dish = ?", new String[] { DishStr });
     }
 }

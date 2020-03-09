@@ -2,6 +2,7 @@ package com.example.bestbiteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +13,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -25,20 +24,20 @@ import java.util.concurrent.ExecutionException;
 public class Preference1 extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     ArrayList<String> options;
-
-
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference1);
         getSupportActionBar().hide();
-
+        db = new DatabaseHelper(this);
         ArrayList<String> dishes = new ArrayList<String >();
         Downloader d = new Downloader();
         d.execute("http://umtri.org/BestBiteServer/totalmenu/Menu.txt");
         try {
             dishes = d.get();
+            db.updateMenu(dishes);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -84,7 +83,7 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selected = options[position];
+        String selected = options.get(position);
         Toast.makeText(this, selected + "'s current rating: " + db.checkRating(selected), Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), Popup.class);
         startActivity(i);

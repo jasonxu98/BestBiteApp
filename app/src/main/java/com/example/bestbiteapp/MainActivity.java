@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
-    private DatabaseHelper db;
     private ImageView imageView;
 
     @Override
@@ -19,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        db = new DatabaseHelper(this);
-        Button button = (Button) findViewById(R.id.button1);
+        Button button1 = (Button) findViewById(R.id.button1);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openPreference1() {
-        db.updateMenu();
         Intent intent = new Intent(this, Preference1.class);
         startActivity(intent);
     }
