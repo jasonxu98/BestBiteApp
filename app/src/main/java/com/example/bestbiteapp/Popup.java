@@ -37,7 +37,6 @@ public class Popup extends AppCompatActivity {
         if(extras != null) {
             value = extras.getString("key");
         }
-
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -66,12 +65,32 @@ public class Popup extends AppCompatActivity {
             }
         }
 
+        if(curRating == 0) zero.setBackgroundColor(Color.parseColor("#f2c649"));
+        else if(curRating == 2) two.setBackgroundColor(Color.parseColor("#f2c649"));
+        else if(curRating == 4) four.setBackgroundColor(Color.parseColor("#f2c649"));
+        else eight.setBackgroundColor(Color.parseColor("#f2c649"));
+
 
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(curRating == 0) {
+                    return;
+                }
                 zero.setBackgroundColor(Color.parseColor("#f2c649"));
-                zero.setText(String.valueOf(curRating));
+
+                if(curRating == 2) {
+                    two.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 4) {
+                    four.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 8) {
+                    eight.setBackgroundColor(Color.WHITE);
+                }
+                curRating = 0;
+
+
+
+//                zero.setText(String.valueOf(curRating + 1));
             }
         });
 
@@ -79,9 +98,59 @@ public class Popup extends AppCompatActivity {
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(curRating == 2) {
+                    return;
+                }
+                two.setBackgroundColor(Color.parseColor("#f2c649"));
+
+                if(curRating == 0) {
+                    zero.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 4) {
+                    four.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 8) {
+                    eight.setBackgroundColor(Color.WHITE);
+                }
+                curRating = 2;
             }
         });
 
+        four = (Button) findViewById(R.id.four);
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(curRating == 4) {
+                    return;
+                }
+                four.setBackgroundColor(Color.parseColor("#f2c649"));
+                if(curRating == 0) {
+                    zero.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 2) {
+                    two.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 8) {
+                    eight.setBackgroundColor(Color.WHITE);
+                }
+                curRating = 4;
+            }
+        });
+
+        eight = (Button) findViewById(R.id.eight);
+        eight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(curRating == 8) {
+                    return;
+                }
+                eight.setBackgroundColor(Color.parseColor("#f2c649"));
+                if(curRating == 0) {
+                    zero.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 4) {
+                    four.setBackgroundColor(Color.WHITE);
+                } else if(curRating == 2) {
+                    two.setBackgroundColor(Color.WHITE);
+                }
+                curRating = 8;
+            }
+        });
 
     }
 }
