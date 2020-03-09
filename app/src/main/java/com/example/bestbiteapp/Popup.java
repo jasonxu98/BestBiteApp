@@ -66,7 +66,7 @@ public class Popup extends AppCompatActivity {
             }
         }
 
-
+        ++curRating;
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +79,7 @@ public class Popup extends AppCompatActivity {
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
             }
         });
 
