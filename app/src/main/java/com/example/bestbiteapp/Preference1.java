@@ -87,8 +87,6 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (position == 0) {
             return;
-        } else {
-            position = position - 1;
         }
         Toast.makeText(this, " You select >> "+options.get(position), Toast.LENGTH_SHORT).show();
 
@@ -98,4 +96,5 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 }
