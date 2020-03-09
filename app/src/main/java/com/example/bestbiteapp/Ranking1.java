@@ -46,14 +46,14 @@ public class Ranking1 extends AppCompatActivity {
                 }
                 conn.disconnect();
             } catch (Exception e) {
-
+                Log.e("error fetching contents", e.toString());
             }
 
             return result;
         }
 
         protected void onPostExecute (String result) {
-            src.setText("Something is terribly wrong with this");
+            src.setText(result);
         }
     }
 }
