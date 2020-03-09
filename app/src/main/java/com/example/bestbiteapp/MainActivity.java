@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    private DatabaseHelper db;
     private ImageView imageView;
     private Button button1;
 
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        db = new DatabaseHelper(this);
         Button button = (Button) findViewById(R.id.button1);
 
         button1 = (Button) findViewById(R.id.button1);
