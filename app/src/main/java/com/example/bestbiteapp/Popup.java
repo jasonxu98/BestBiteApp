@@ -2,6 +2,8 @@ package com.example.bestbiteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteException;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -10,11 +12,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 public class Popup extends AppCompatActivity {
 
     private DatabaseHelper db;
     private String value;
     private TextView DishName;
+
+    private int curRating = 0;
     Button zero;
     Button two;
     Button four;
@@ -49,10 +55,33 @@ public class Popup extends AppCompatActivity {
         DishName.setText(value);
 
         zero = (Button) findViewById(R.id.zero);
+
+        try {
+            curRating = db.checkRating(value);
+        } catch (SQLiteException e) {
+            try {
+                throw new IOException(e);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+
         zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zero.setBackgroundColor(Color.parseColor("#f2c649"));
+                zero.setText(String.valueOf(curRating));
+            }
+        });
+
+        two = (Button) findViewById(R.id.two);
+        two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
+
+
     }
 }
