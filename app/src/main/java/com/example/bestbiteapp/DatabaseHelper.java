@@ -72,6 +72,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateRating(String DishStr, int newRating){
         SQLiteDatabase connection = this.getWritableDatabase();
-        connection.rawQuery("UPDATE " + TBL_NAME + " SET rating = " + newRating + " WHERE dish = ?", new String[] { DishStr });
+        ContentValues cv = new ContentValues();
+        cv.put("rating", newRating);
+        connection.update(TBL_NAME, cv, "dish = ?", new String[]{DishStr});
     }
 }
