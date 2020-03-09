@@ -44,10 +44,11 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        dishes.add(0, "Click here to select a dish!");
 
         Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         // Creating ArrayAdapter using the string array and default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dishes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, dishes);
         // Specify layout to be used when list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Applying the adapter to our spinner
@@ -84,7 +85,11 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        if (position == 0) {
+            return;
+        } else {
+            position = position - 1;
+        }
         Toast.makeText(this, " You select >> "+options.get(position), Toast.LENGTH_SHORT).show();
 
     }
