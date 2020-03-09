@@ -26,6 +26,7 @@ public class Popup extends AppCompatActivity {
     Button two;
     Button four;
     Button eight;
+    Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,6 @@ public class Popup extends AppCompatActivity {
         DishName = (TextView) findViewById(R.id.DishName);
         DishName.setText(value);
 
-        zero = (Button) findViewById(R.id.zero);
 
         try {
             curRating = db.checkRating(value);
@@ -66,10 +66,16 @@ public class Popup extends AppCompatActivity {
             }
         }
 
+        zero = (Button) findViewById(R.id.zero);
+        two = (Button) findViewById(R.id.two);
+        four = (Button) findViewById(R.id.four);
+        eight = (Button) findViewById(R.id.eight);
+
         if(curRating == 0) zero.setBackgroundColor(Color.parseColor("#f2c649"));
         else if(curRating == 2) two.setBackgroundColor(Color.parseColor("#f2c649"));
         else if(curRating == 4) four.setBackgroundColor(Color.parseColor("#f2c649"));
         else eight.setBackgroundColor(Color.parseColor("#f2c649"));
+
 
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +100,7 @@ public class Popup extends AppCompatActivity {
             }
         });
 
-        two = (Button) findViewById(R.id.two);
+
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +120,7 @@ public class Popup extends AppCompatActivity {
             }
         });
 
-        four = (Button) findViewById(R.id.four);
+
         four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +140,7 @@ public class Popup extends AppCompatActivity {
             }
         });
 
-        eight = (Button) findViewById(R.id.eight);
+
         eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +157,14 @@ public class Popup extends AppCompatActivity {
                     two.setBackgroundColor(Color.WHITE);
                 }
                 curRating = 8;
+            }
+        });
+
+        back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
