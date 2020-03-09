@@ -15,18 +15,18 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_preference1);
         getSupportActionBar().hide();
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         // Creating ArrayAdapter using the string array and default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Animals, android.R.layout.simple_spinner_item);
         // Specify layout to be used when list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Applying the adapter to our spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        spinner1.setAdapter(adapter);
+        spinner1.setOnItemSelectedListener(this);
 
         options = Preference1.this.getResources().getStringArray(R.array.Animals);
 
