@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -77,7 +78,7 @@ public class Popup extends AppCompatActivity {
                     return;
                 }
                 zero.setBackgroundColor(Color.parseColor("#f2c649"));
-
+                db.updateRating(value, 0);
                 if(curRating == 2) {
                     two.setBackgroundColor(Color.WHITE);
                 } else if(curRating == 4) {
@@ -101,7 +102,7 @@ public class Popup extends AppCompatActivity {
                     return;
                 }
                 two.setBackgroundColor(Color.parseColor("#f2c649"));
-
+                db.updateRating(value, 2);
                 if(curRating == 0) {
                     zero.setBackgroundColor(Color.WHITE);
                 } else if(curRating == 4) {
@@ -121,6 +122,7 @@ public class Popup extends AppCompatActivity {
                     return;
                 }
                 four.setBackgroundColor(Color.parseColor("#f2c649"));
+                db.updateRating(value, 4);
                 if(curRating == 0) {
                     zero.setBackgroundColor(Color.WHITE);
                 } else if(curRating == 2) {
@@ -140,6 +142,7 @@ public class Popup extends AppCompatActivity {
                     return;
                 }
                 eight.setBackgroundColor(Color.parseColor("#f2c649"));
+                db.updateRating(value, 8);
                 if(curRating == 0) {
                     zero.setBackgroundColor(Color.WHITE);
                 } else if(curRating == 4) {
