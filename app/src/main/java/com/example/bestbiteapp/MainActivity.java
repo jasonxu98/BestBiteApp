@@ -13,7 +13,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper db;
     private ImageView imageView;
-    private Button button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,26 +22,31 @@ public class MainActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         Button button = (Button) findViewById(R.id.button1);
 
-        button1 = (Button) findViewById(R.id.button1);
-        button.setOnClickListener(new View.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openPreference1();
             }
         });
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////            Button button2 = (Button) findViewById(R.id.button1);
-////            button2.setText("Yuxuan is GAY!!");
-//                openPreference1();
-//            }
-//        });
+
+        Button button2 = (Button) findViewById(R.id.button2);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPreference2();
+            }
+        });
     }
 
     public void openPreference1() {
         db.updateMenu();
         Intent intent = new Intent(this, Preference1.class);
+        startActivity(intent);
+    }
+
+    public void openPreference2() {
+        Intent intent = new Intent(this, Ranking1.class);
         startActivity(intent);
     }
 
