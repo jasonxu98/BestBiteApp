@@ -30,25 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL("CREATE TABLE " + TBL_NAME + " (dish TEXT PRIMARY KEY,rating INTEGER)");
-
-            ArrayList<String> TotalMenu = new ArrayList<String>();
-            TotalMenu.add("chicken");
-            TotalMenu.add("steak");
-            TotalMenu.add("pork");
-            TotalMenu.add("curry");
-
-            for (int i = 0; i < TotalMenu.size(); i++){
-                String DishName = TotalMenu.get(i);
-                SQLiteDatabase connection_r = this.getReadableDatabase();
-                Cursor cur = db.rawQuery("SELECT * FROM "+ TBL_NAME + " WHERE dish = " + DishName, null );
-                if (cur.getCount() == 0){
-                    SQLiteDatabase connection_w = this.getWritableDatabase();
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("dish", DishName);
-                    contentValues.put("rating", 0);
-                    connection_w.insert(TBL_NAME, null, contentValues);
-                }
-            }
         } catch (SQLiteException e) {
             try {
                 throw new IOException(e);
@@ -61,18 +42,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TBL_NAME);
-        onCreate((db));
+        onCreate(db);
+    }
+
+    public void updateMenu(){
+        ArrayList<String> TotalMenu = new ArrayList<String>();
+        TotalMenu.add("chicken");
+        TotalMenu.add("steak");
+        TotalMenu.add("pork");
+        TotalMenu.add("curry");
+
+        for (int i = 0; i < TotalMenu.size(); i++){
+            String DishName = TotalMenu.get(i);
+            SQLiteDatabase connection = this.getWritableDatabase();
+            Cursor cur = connection.rawQuery("SELECT * FROM "+ TBL_NAME + " WHERE dish = '" + DishName + "'", null );
+            if (cur.getCount() == 0){
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("dish", DishName);
+                contentValues.put("rating", 0);
+                connection.insert(TBL_NAME, null, contentValues);
+            }
+        }
     }
 
     public int checkRating(String DishName) {
         SQLiteDatabase connection_r = this.getReadableDatabase();
-        Cursor cur = connection_r.rawQuery("SELECT rating FROM "+ TBL_NAME + " WHERE dish = " + DishName, null );
+        Cursor cur = connection_r.rawQuery("SELECT rating FROM "+ TBL_NAME + " WHERE dish = '" + DishName + "'", null );
         cur.moveToFirst();
-        return cur.getInt(cur.getPosition());
+        return cur.getInt(1);
     }
 
     public void updateRating(String DishName, int newRating){
         SQLiteDatabase connection_w = this.getWritableDatabase();
-        connection_w.execSQL("UPDATE TABLE " + TBL_NAME + " SET rating = " + newRating + " WHERE dish = " + DishName );
+        connection_w.execSQL("UPDATE " + TBL_NAME + " SET rating = " + newRating + " WHERE dish = '" + DishName + "'");
     }
 }
