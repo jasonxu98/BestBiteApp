@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class Ranking1 extends AppCompatActivity {
@@ -32,9 +33,9 @@ public class Ranking1 extends AppCompatActivity {
         d.execute("http://umtri.org/BestBiteServer/totalmenu/Menu.txt");
     }
 
-    class Downloader extends AsyncTask<String, Void, String> {
-        public String doInBackground(String... urls) {
-            String result = null;
+    class Downloader extends AsyncTask<String, Void, ArrayList<String> > {
+        public ArrayList<String> doInBackground(String... urls) {
+            ArrayList<String>  result = new ArrayList<String>();
             try {
                 URL url = new URL(urls[0]);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -42,7 +43,7 @@ public class Ranking1 extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 String line = null;
                 while ((line = reader.readLine()) != null) {
-                    result = result + line;
+                    result.add(line);
                 }
                 conn.disconnect();
             } catch (Exception e) {
@@ -52,8 +53,8 @@ public class Ranking1 extends AppCompatActivity {
             return result;
         }
 
-        protected void onPostExecute (String result) {
-            src.setText(result);
+        protected void onPostExecute (ArrayList<String> result) {
+            src.setText(result.get(0));
         }
     }
 }
