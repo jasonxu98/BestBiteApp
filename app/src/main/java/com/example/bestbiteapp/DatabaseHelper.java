@@ -21,9 +21,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, 1);
     }
 
-    public String[] GetTotalMenu(){
-
-    }
+//    public String[] GetTotalMenu(){
+//
+//    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -37,8 +37,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
 
-        String[] TotalMenu = GetTotalMenu();
-        for (int i = 0; i < TotalMenu.length; i++){
+//        String[] TotalMenu = GetTotalMenu();
+        ArrayList<String> TotalMenu = new ArrayList<String>();
+        TotalMenu.add("chicken");
+        TotalMenu.add("steak");
+        TotalMenu.add("pork");
+        TotalMenu.add("curry");
+
+        for (int i = 0; i < TotalMenu.size(); i++){
             String DishName = TotalMenu.get(i);
             SQLiteDatabase connection_r = this.getReadableDatabase();
             Cursor cur = db.rawQuery("SELECT * FROM "+ TBL_NAME + " WHERE dish = " + DishName, null );
