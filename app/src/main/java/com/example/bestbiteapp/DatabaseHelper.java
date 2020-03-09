@@ -65,9 +65,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase connection = this.getReadableDatabase();
         Cursor cur = connection.rawQuery("SELECT rating FROM "+ TBL_NAME + " WHERE dish = ?", new String[] { DishStr } );
         cur.moveToFirst();
-//        int rating = cur.getInt(1);
-//        cur.close();
-        return cur.getInt(1);
+        int index = cur.getColumnIndexOrThrow("rating");
+        int curr_rating = cur.getInt(index);
+        return curr_rating;
     }
 
     public void updateRating(String DishStr, int newRating){
