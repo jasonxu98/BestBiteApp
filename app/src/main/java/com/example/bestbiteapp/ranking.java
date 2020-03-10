@@ -48,7 +48,7 @@ class Main {
         int current_hour = Integer.parseInt(sdf.format(new Date()));
         System.out.println("Current hour is: " + current_hour);
 
-        DiningHallPair[] ranking = new DiningHallPair[7];
+        Vector<DiningHallPair> ranking = new Vector<>();
 
         try{
             String url = "http://umtri.org/BestBiteServer/todaymenu/Menu.xml";
@@ -66,7 +66,7 @@ class Main {
                 System.out.println("Name: " + dining_hall_name);
                 NodeList meals = dining_hall_element.getElementsByTagName("meal");
                 int dining_hall_points = 0;
-                ranking[dining_hall_index] = new DiningHallPair(dining_hall_name, dining_hall_points);
+                ranking.add(new DiningHallPair(dining_hall_name, dining_hall_points));
 
 
                 for (int meal_index = 0; meal_index < meals.getLength(); meal_index++) {
@@ -91,29 +91,30 @@ class Main {
                             }
 
                             dining_hall_points += dish_point;
-                            ranking[dining_hall_index].top_dishes.add(new DishPair(dish_name, dish_point));
+                            ranking.get(dining_hall_index).top_dishes.add(new DishPair(dish_name, dish_point));
 
                             System.out.println("        " + dish_point);
                         }
                     }
                 }
 
-                ranking[dining_hall_index].dining_hall_points = dining_hall_points;
+                ranking.get(1).dining_hall_points = dining_hall_points;
             }
 
             for (int i = 0; i < 7; i++) {
-                System.out.println(ranking[i].dining_hall_name + " " + ranking[i].dining_hall_points);
+                System.out.println(ranking.get(i).dining_hall_name + " " + ranking.get(i).dining_hall_points);
             }
 
-            Arrays.sort(ranking);
+            Collections.sort(ranking);
+
             System.out.println("----------------------------");
 
             // Ranking現在按照points從高到低排序
             for (int i = 0; i < 7; i++) {
-                Collections.sort(ranking[i].top_dishes);
-                System.out.println(ranking[i].dining_hall_name + " " + ranking[i].dining_hall_points);
-                for (int j = 0; j < ranking[i].top_dishes.size(); j++) {
-                    System.out.println("    " + ranking[i].top_dishes.get(j).dish_name + " " + ranking[i].top_dishes.get(j).dish_rating);
+                Collections.sort(ranking.get(i).top_dishes);
+                System.out.println(ranking.get(i).dining_hall_name + " " + ranking.get(i).dining_hall_points);
+                for (int j = 0; j < ranking.get(i).top_dishes.size(); j++) {
+                    System.out.println("    " + ranking.get(1).top_dishes.get(j).dish_name + " " + ranking.get(i).top_dishes.get(j).dish_rating);
                 }
             }
 
