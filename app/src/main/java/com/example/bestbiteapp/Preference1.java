@@ -2,15 +2,19 @@ package com.example.bestbiteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -45,7 +49,7 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
         }
         dishes.add(0, "Click here to select a dish!");
 
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        SearchableSpinner spinner1 = (SearchableSpinner) findViewById(R.id.spinner1);
         // Creating ArrayAdapter using the string array and default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, dishes);
         // Specify layout to be used when list of choices appears
@@ -98,5 +102,4 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
 }
