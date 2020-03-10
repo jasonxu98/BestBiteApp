@@ -2,8 +2,14 @@ package com.example.bestbiteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.method.ScrollingMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,12 +23,14 @@ import java.util.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 
 public class Ranking1 extends AppCompatActivity {
     private Button button;
     private TextView text1;
     private DatabaseHelper db1;
+    private Vector<DiningHallPair> data;
 
     class DiningHallPair implements Comparable<DiningHallPair> {
         String dining_hall_name;
@@ -59,6 +67,7 @@ public class Ranking1 extends AppCompatActivity {
             // codes under review
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             int current_hour = Integer.parseInt(sdf.format(new Date()));
+            current_hour = 1200;
             System.out.println("Current hour is: " + current_hour);
 
             Vector<DiningHallPair> ranking = new Vector<>();
@@ -111,7 +120,7 @@ public class Ranking1 extends AppCompatActivity {
                         }
                     }
 
-                    ranking.get(1).dining_hall_points = dining_hall_points;
+                    ranking.get(dining_hall_index).dining_hall_points = dining_hall_points;
                 }
 
                 for (int i = 0; i < 7; i++) {
@@ -157,19 +166,47 @@ public class Ranking1 extends AppCompatActivity {
 
         Downloader d = new Downloader();
         d.execute();
+        data = new Vector<>();
+        try {
+            data = d.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
-
-        final Button button8416 = (Button) findViewById(R.id.button8416);
         text1 = (TextView) findViewById(R.id.textView3);
-
-        button8416.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                text1.setText("this is text ");
+        text1.setMovementMethod(new ScrollingMovementMethod());
+        text1.setText("");
+        for (int i = 0; i < data.size(); i++) {
+            Spannable word = new SpannableString(String.valueOf(i + 1) + ". " + data.get(i).dining_hall_name);
+            word.setSpan(new ForegroundColorSpan(Color.parseColor("#f2c649")), 0, word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            word.setSpan(new RelativeSizeSpan(6f), 0,word.length(), 0);
+            text1.append(word);
+            text1.append("\n");
+            Spannable word1 = new SpannableString("  Total Points: " + data.get(i).dining_hall_points);
+            word1.setSpan(new ForegroundColorSpan(Color.WHITE), 0, word1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            word1.setSpan(new RelativeSizeSpan(2.5f), 0,word1.length(), 0);
+            text1.append(word1);
+            text1.append("\n");
+            Spannable word5 = new SpannableString("  Your Favourites:");
+            word5.setSpan(new ForegroundColorSpan(Color.parseColor("#f2c649")), 0, word5.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            word5.setSpan(new RelativeSizeSpan(4f), 0,word5.length(), 0);
+            text1.append(word5);
+            text1.append("\n");
+            for (int j = 0; j < 3 && j < data.get(i).top_dishes.size(); j++) {
+                Spannable word3 = new SpannableString(data.get(i).top_dishes.get(j).dish_name);
+                word3.setSpan(new ForegroundColorSpan(Color.WHITE), 0, word3.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                word3.setSpan(new RelativeSizeSpan(2.5f), 0,word3.length(), 0);
+                text1.append(word3);
+                Spannable word4 = new SpannableString("\t\t" + data.get(i).top_dishes.get(j).dish_rating);
+                word4.setSpan(new ForegroundColorSpan(Color.parseColor("#f2c649")), 0, word4.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                word4.setSpan(new RelativeSizeSpan(3f), 0,word4.length(), 0);
+                text1.append(word4);
+                text1.append("\n");
             }
-        });
-
+            text1.append("\n-------------------------------------------------------------------------------------\n");
+        }
     }
 }

@@ -13,44 +13,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="26dp"
         android:gravity="center"
         android:text="Your top picks"
         android:textColor="#FFFFFF"
         android:textSize="60dp"
         android:textStyle="bold"
         app:fontFamily="@font/amatic_sc"
-        app:layout_constraintBottom_toTopOf="@+id/button8416"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button8416"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="23dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="342dp"
+        android:layout_height="563dp"
         android:layout_marginStart="73dp"
         android:layout_marginLeft="73dp"
         android:layout_marginEnd="73dp"
         android:layout_marginRight="73dp"
-        android:layout_marginBottom="432dp"
+        android:layout_marginBottom="48dp"
+        android:scrollbars = "vertical"
+        android:gravity = "center"
         android:text="TextView"
+        android:textStyle="bold"
+        app:fontFamily="@font/amatic_sc"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8416" />
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
