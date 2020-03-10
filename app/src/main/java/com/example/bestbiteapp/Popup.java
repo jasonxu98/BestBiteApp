@@ -76,7 +76,6 @@ public class Popup extends AppCompatActivity {
         else if(curRating == 4) four.setBackgroundColor(Color.parseColor("#f2c649"));
         else eight.setBackgroundColor(Color.parseColor("#f2c649"));
 
-
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

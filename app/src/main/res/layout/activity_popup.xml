@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00153F"
+    android:background="@drawable/customborder"
     tools:context=".Popup">
 
     <TextView
@@ -19,14 +19,16 @@
         app:fontFamily="@font/amatic_sc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.234" />
 
     <Button
         android:id="@+id/zero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        android:layout_width="115dp"
+        android:layout_height="44dp"
         android:gravity="center_horizontal"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +40,8 @@
 
     <Button
         android:id="@+id/two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="44dp"
         android:gravity="center_horizontal"
         android:text="2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,8 +53,8 @@
 
     <Button
         android:id="@+id/four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="44dp"
         android:gravity="center_horizontal"
         android:text="4"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,8 +66,8 @@
 
     <Button
         android:id="@+id/eight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="44dp"
         android:gravity="center_horizontal"
         android:text="8"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,6 +84,8 @@
         android:text="back"
         app:layout_constraintBottom_toTopOf="@+id/DishName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636" />
 </androidx.constraintlayout.widget.ConstraintLayout>

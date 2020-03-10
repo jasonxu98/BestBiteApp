@@ -67,7 +67,6 @@ public class Ranking1 extends AppCompatActivity {
             // codes under review
             SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
             int current_hour = Integer.parseInt(sdf.format(new Date()));
-            current_hour = 1200;
             System.out.println("Current hour is: " + current_hour);
 
             Vector<DiningHallPair> ranking = new Vector<>();
