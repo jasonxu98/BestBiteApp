@@ -185,10 +185,15 @@ public class Ranking1 extends AppCompatActivity {
             word.setSpan(new RelativeSizeSpan(6f), 0,word.length(), 0);
             text1.append(word);
             text1.append("\n");
-            Spannable word1 = new SpannableString("  Total Points: " + data.get(i).dining_hall_points);
+            Spannable word1 = new SpannableString("  Total Points: ");
             word1.setSpan(new ForegroundColorSpan(Color.WHITE), 0, word1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             word1.setSpan(new RelativeSizeSpan(2.5f), 0,word1.length(), 0);
+
+            Spannable word6 = new SpannableString(String.valueOf(data.get(i).dining_hall_points));
+            word6.setSpan(new ForegroundColorSpan(Color.WHITE), 0, word6.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            word6.setSpan(new RelativeSizeSpan(3.5f), 0,word6.length(), 0);
             text1.append(word1);
+            text1.append(word6);
             text1.append("\n");
             Spannable word5 = new SpannableString("  Your Favourites:");
             word5.setSpan(new ForegroundColorSpan(Color.parseColor("#f2c649")), 0, word5.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
