@@ -1,9 +1,12 @@
 package com.example.bestbiteapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +33,7 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
 
     ArrayList<String> options;
     private DatabaseHelper db;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,33 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
 
         options = dishes;
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.app_name);
+        builder.setMessage("Are you sure to reset all your preferences?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+
+                Toast.makeText(getApplicationContext(), "All preferences reset to 0!", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog alert = builder.create();
+        
+        button = (Button) findViewById(R.id.button36);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.show();
+            }
+        });
     }
+
+
     class Downloader extends AsyncTask<String, Void, ArrayList<String> > {
         public ArrayList<String> doInBackground(String... urls) {
             ArrayList<String>  result = new ArrayList<String>();
