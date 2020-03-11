@@ -71,7 +71,7 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
-
+                db.reset();
                 Toast.makeText(getApplicationContext(), "All preferences reset to 0!", Toast.LENGTH_LONG).show();
             }
         });
