@@ -76,4 +76,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("rating", newRating);
         connection.update(TBL_NAME, cv, "dish = ?", new String[]{DishStr});
     }
+
+    public void reset(){
+        SQLiteDatabase connection = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("rating", 0);
+        connection.update(TBL_NAME, cv, null, null);
+    }
 }
