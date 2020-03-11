@@ -81,7 +81,7 @@ public class Preference1 extends AppCompatActivity implements AdapterView.OnItem
             }
         });
         final AlertDialog alert = builder.create();
-        
+
         button = (Button) findViewById(R.id.button36);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
